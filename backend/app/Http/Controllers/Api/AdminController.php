@@ -189,7 +189,7 @@ class AdminController extends Controller
                 'id' => $l->id,
                 'name' => $l->title,
                 'description' => $l->description,
-                'days_of_week' => $l->days_of_week,
+                'days' => $l->days,
                 'start_time' => $l->start_time,
                 'end_time' => $l->end_time,
                 'price' => $l->price,

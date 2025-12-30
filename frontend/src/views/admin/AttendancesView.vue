@@ -7,9 +7,9 @@ interface Attendance {
   student_name: string
   lesson: string
   status: string
-  attended_at: string
-  check_in_method: string
-  notes: string | null
+  date: string
+  check_in_time: string | null
+  note: string | null
 }
 
 const attendances = ref<Attendance[]>([])
@@ -38,11 +38,6 @@ const statusColors: Record<string, string> = {
   makeup: 'badge-info'
 }
 
-const methodLabels: Record<string, string> = {
-  qr: 'QR 스캔',
-  manual: '수동 입력',
-  auto: '자동 체크'
-}
 
 async function loadAttendances() {
   loading.value = true
@@ -73,16 +68,6 @@ async function updateStatus(attendance: Attendance, newStatus: string) {
   }
 }
 
-function formatDate(dateStr: string): string {
-  const date = new Date(dateStr)
-  return date.toLocaleDateString('ko-KR', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit'
-  })
-}
 
 onMounted(() => {
   loadAttendances()
@@ -139,7 +124,7 @@ onMounted(() => {
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">학생</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">수업</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">상태</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">체크인 방식</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">날짜</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">시간</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">비고</th>
               <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">작업</th>
@@ -166,11 +151,9 @@ onMounted(() => {
                   {{ statusLabels[att.status] || att.status }}
                 </span>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-gray-500">
-                {{ methodLabels[att.check_in_method] || att.check_in_method }}
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-gray-500">{{ formatDate(att.attended_at) }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-gray-500">{{ att.notes || '-' }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-gray-500">{{ att.date }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-gray-500">{{ att.check_in_time || '-' }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-gray-500">{{ att.note || '-' }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-right">
                 <div class="flex justify-end gap-2">
                   <button

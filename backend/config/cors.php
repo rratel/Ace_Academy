@@ -16,6 +16,8 @@ return [
         'http://localhost:5173',
         'http://127.0.0.1:5173',
         'http://localhost:3000',
+        'https://ace.concede.kr',
+        'http://ace.concede.kr',
     ],
 
     'allowed_origins_patterns' => [],

@@ -175,18 +175,18 @@ export const adminApi = {
     name: string
     description?: string
     price: number
-    days_of_week: string[]
+    days: string[]
     start_time: string
     end_time: string
     max_students: number
-    branch_id?: number
+    branch_id: number
   }) => api.post('/admin/lessons', data),
 
   updateLesson: (lessonId: number, data: Partial<{
     name: string
     description: string
     price: number
-    days_of_week: string[]
+    days: string[]
     start_time: string
     end_time: string
     max_students: number
